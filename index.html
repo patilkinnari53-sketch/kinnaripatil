@@ -17,6 +17,7 @@
       --shadow:0 18px 45px rgba(35,44,41,.10);
       --grad-1:linear-gradient(135deg,#8b7cf6,#e99bc2,#78cdea);
       --grad-2:linear-gradient(135deg,#dcd4ff,#f8c9df,#c9efff);
+      --grad-3:linear-gradient(135deg,#a78bfa,#f472b6,#38bdf8);
     }
     *{box-sizing:border-box;scroll-behavior:smooth}
     body{
@@ -26,20 +27,25 @@
         radial-gradient(circle at 50% 100%,rgba(255,232,242,.8),transparent 35%),
         linear-gradient(135deg,#fbf9ff 0%,#fff7fb 45%,#f5fcff 100%);
       color:#24304a;font-family:"Space Grotesk",sans-serif;line-height:1.7;overflow-x:hidden;
+      background-size:200% 200%;
+      animation:bgShift 20s ease infinite;
     }
+    @keyframes bgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     a{color:inherit;text-decoration:none}
+    img{max-width:100%}
 
     /* ==== Scroll progress ==== */
     .progress{position:fixed;top:0;left:0;height:4px;background:var(--grad-1);width:0;z-index:1000;transition:width .1s}
 
     /* ==== Navbar ==== */
-    nav{position:sticky;top:0;z-index:999;background:linear-gradient(90deg,#dcd4ff 0%,#f8c9df 48%,#c9efff 100%);backdrop-filter:blur(12px);box-shadow:0 3px 18px rgba(100,90,150,.10)}
+    nav{position:sticky;top:0;z-index:999;background:linear-gradient(90deg,#dcd4ff 0%,#f8c9df 48%,#c9efff 100%);background-size:200% 100%;backdrop-filter:blur(12px);box-shadow:0 3px 18px rgba(100,90,150,.10);animation:navGrad 8s ease infinite}
+    @keyframes navGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     .nav-inner{max-width:1120px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-family:"DM Serif Display",serif;font-size:1.55rem;color:#24304a;font-weight:700}
-    .brand:hover{color:#7659d9}
+    .brand{font-family:"DM Serif Display",serif;font-size:1.55rem;color:#24304a;font-weight:700;transition:all .3s}
+    .brand:hover{color:#7659d9;letter-spacing:.5px}
     .links{display:flex;gap:22px;align-items:center}
     .links a{font-size:.9rem;color:#24304a;font-weight:600;position:relative;transition:color .3s}
-    .links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:#7659d9;transition:width .3s}
+    .links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--grad-1);transition:width .3s}
     .links a:hover{color:#7659d9}
     .links a:hover::after{width:100%}
     .menu{display:none;background:none;border:0;font-size:1.3rem;color:#24304a;cursor:pointer}
@@ -49,27 +55,48 @@
 
     /* ==== HERO ==== */
     header{
-      min-height:76vh;display:grid;grid-template-columns:1.35fr .85fr;gap:45px;align-items:center;padding:65px 0;
+      min-height:76vh;display:grid;grid-template-columns:1.35fr .85fr;gap:45px;align-items:center;padding:65px 40px;
       background:
         radial-gradient(circle at 15% 20%,rgba(255,255,255,.65),transparent 25%),
         radial-gradient(circle at 85% 15%,rgba(255,255,255,.55),transparent 25%),
         linear-gradient(135deg,#e5ddff 0%,#f9d9e9 48%,#d8f3ff 100%);
-      border-radius:24px;padding-left:40px;padding-right:40px;
+      background-size:200% 200%;
+      border-radius:24px;
       position:relative;overflow:hidden;
+      animation:heroGrad 12s ease infinite;
     }
+    @keyframes heroGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     header::before{
       content:'';position:absolute;inset:0;
       background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.4),transparent 50%);
       pointer-events:none;animation:heroGlow 6s ease-in-out infinite;
     }
+    header::after{
+      content:'';position:absolute;top:-50%;right:-50%;width:400px;height:400px;border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);
+      animation:orbFloat 15s ease-in-out infinite;pointer-events:none;
+    }
+    @keyframes orbFloat{
+      0%,100%{transform:translate(0,0) scale(1)}
+      50%{transform:translate(-40px,40px) scale(1.15)}
+    }
     @keyframes heroGlow{0%,100%{opacity:.5}50%{opacity:.9}}
     .eyebrow{color:#7659d9;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;animation:fadeUp .8s ease-out}
     h1{font-family:"DM Serif Display",serif;font-size:clamp(3.4rem,8vw,6.5rem);line-height:.95;margin:14px 0;color:#24304a;animation:fadeUp .8s ease-out .15s both}
+    h1 span{display:inline-block;animation:letterPop .6s ease-out backwards}
+    @keyframes letterPop{from{opacity:0;transform:translateY(20px) rotate(-5deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
     .tagline{font-size:1.12rem;color:#526078;max-width:690px;animation:fadeUp .8s ease-out .3s both}
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;animation:fadeUp .8s ease-out .45s both}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;border:2px solid transparent;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
-    .btn.primary{background:var(--grad-1);color:#fff;box-shadow:0 8px 22px rgba(139,124,246,.35)}
-    .btn.primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(139,124,246,.5)}
+    .btn::after{
+      content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+      transition:left .6s;
+    }
+    .btn:hover::after{left:100%}
+    .btn.primary{background:var(--grad-1);color:#fff;box-shadow:0 8px 22px rgba(139,124,246,.35);background-size:200% 200%}
+    .btn.primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(139,124,246,.5);animation:btnGrad 2s ease infinite}
+    @keyframes btnGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     .btn.secondary{background:rgba(255,255,255,.85);color:#51439a;border:2px solid #9b8bea}
     .btn.secondary:hover{background:var(--grad-2);color:#24304a;transform:translateY(-3px)}
 
@@ -79,12 +106,16 @@
       background:rgba(255,255,255,.86);border:1px solid rgba(139,124,246,.15);
       border-radius:20px;box-shadow:0 14px 40px rgba(90,80,140,.15);padding:28px;
       transform:rotate(1deg);transition:all .4s;
-      animation:fadeUp .9s ease-out .5s both;backdrop-filter:blur(10px);
+      animation:fadeUp .9s ease-out .5s both,cardFloat 5s ease-in-out infinite 1.4s;
+      backdrop-filter:blur(10px);
     }
-    .hero-card:hover{transform:rotate(0deg) translateY(-6px);box-shadow:0 22px 55px rgba(90,80,140,.22)}
+    @keyframes cardFloat{0%,100%{transform:rotate(1deg) translateY(0)}50%{transform:rotate(1deg) translateY(-8px)}}
+    .hero-card:hover{transform:rotate(0deg) translateY(-6px);box-shadow:0 22px 55px rgba(90,80,140,.22);animation-play-state:paused}
     .hero-card h3{margin-top:0;color:#51439a;font-family:"DM Serif Display",serif}
-    .hero-card li{margin:13px 0;color:#526078;list-style:none;display:flex;gap:10px;align-items:flex-start}
-    .hero-card li i{color:#7659d9;margin-top:4px;flex-shrink:0}
+    .hero-card li{margin:13px 0;color:#526078;list-style:none;display:flex;gap:10px;align-items:flex-start;transition:transform .3s}
+    .hero-card li:hover{transform:translateX(6px)}
+    .hero-card li i{color:#7659d9;margin-top:4px;flex-shrink:0;transition:transform .3s}
+    .hero-card li:hover i{transform:scale(1.2) rotate(-8deg)}
 
     /* ==== Sections ==== */
     section{padding:68px 0;border-top:1px solid rgba(139,124,246,.12);opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
@@ -99,18 +130,25 @@
       background:var(--grad-1);border-radius:2px;transition:width .5s;
     }
     .section-title:hover::after{width:100%}
-    .section-title i{font-size:1.15rem;margin-right:10px;color:#7659d9}
+    .section-title i{font-size:1.15rem;margin-right:10px;color:#7659d9;transition:transform .3s}
+    .section-title:hover i{transform:rotate(-15deg) scale(1.15)}
 
     .about{font-size:1.05rem;color:#526078;max-width:900px}
 
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-    .card, .hero-card, .project-card, .timeline-card{
+    .card, .hero-card, .project-card, .timeline-card, .edu-card{
       background:rgba(255,255,255,.86);border:1px solid rgba(139,124,246,.15);
       border-radius:18px;box-shadow:0 12px 32px rgba(90,80,140,.09);
       padding:24px;transition:all .4s;backdrop-filter:blur(10px);
+      position:relative;overflow:hidden;
     }
-    .card:hover,.project-card:hover,.timeline-card:hover{
+    .card::before, .edu-card::before{
+      content:'';position:absolute;top:0;left:0;width:4px;height:0;
+      background:var(--grad-1);transition:height .5s;
+    }
+    .card:hover::before, .edu-card:hover::before{height:100%}
+    .card:hover,.project-card:hover,.timeline-card:hover,.edu-card:hover{
       transform:translateY(-8px);box-shadow:0 22px 48px rgba(90,80,140,.18);
       border-color:rgba(139,124,246,.35);
     }
@@ -121,6 +159,11 @@
     .timeline-item::before{
       content:'';position:absolute;left:-36px;top:8px;width:14px;height:14px;border-radius:50%;
       background:var(--grad-1);box-shadow:0 0 0 4px rgba(155,139,234,.2);
+      animation:dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse{
+      0%,100%{box-shadow:0 0 0 4px rgba(155,139,234,.2)}
+      50%{box-shadow:0 0 0 10px rgba(155,139,234,.05)}
     }
     .timeline-item h3{margin:0 0 4px;color:#24304a}
     .accent{color:#7659d9;font-weight:700;font-size:.9rem}
@@ -130,53 +173,91 @@
     .pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
     .pill{
       background:linear-gradient(135deg,#eee9ff,#ffeaf3,#e5f8ff);
+      background-size:200% 200%;
       border:1px solid rgba(139,124,246,.13);padding:8px 14px;border-radius:999px;
       font-size:.85rem;font-weight:600;color:#34415c;cursor:default;
       transition:all .3s;animation:pillIn .5s ease-out backwards;
     }
-    .pill:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 20px rgba(139,124,246,.25);background:var(--grad-1);color:#fff}
+    .pill:hover{
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:0 8px 20px rgba(139,124,246,.25);
+      color:#fff;
+      background:var(--grad-3);
+      background-size:200% 200%;
+      animation:pillHover 2s ease infinite;
+    }
+    @keyframes pillHover{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     @keyframes pillIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
     .skill-heading{color:#7659d9;font-weight:700;margin:22px 0 10px;font-size:1rem}
 
     /* ==== Project cards ==== */
-    .project-card{display:flex;flex-direction:column;justify-content:space-between;min-height:240px;position:relative;overflow:hidden}
+    .project-card{display:flex;flex-direction:column;justify-content:space-between;min-height:250px;position:relative;overflow:hidden}
     .project-card::before{
       content:'';position:absolute;top:0;left:-100%;width:100%;height:3px;
-      background:var(--grad-1);transition:left .5s;
+      background:var(--grad-1);transition:left .6s;
     }
     .project-card:hover::before{left:0}
-    .project-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .project-card::after{
+      content:'';position:absolute;bottom:-50%;right:-50%;width:200px;height:200px;border-radius:50%;
+      background:radial-gradient(circle,rgba(139,124,246,.1),transparent 70%);
+      opacity:0;transition:opacity .5s;
+    }
+    .project-card:hover::after{opacity:1}
+    .project-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
     .mini{padding:8px 14px;font-size:.8rem;border-radius:8px}
-    .tag{display:inline-block;background:var(--grad-2);padding:5px 12px;border-radius:8px;font-size:.72rem;font-weight:700;color:#51439a;margin-bottom:12px;letter-spacing:.5px}
+    .tag{display:inline-block;background:var(--grad-2);padding:5px 12px;border-radius:8px;font-size:.72rem;font-weight:700;color:#51439a;margin-bottom:12px;letter-spacing:.5px;transition:all .3s}
+    .project-card:hover .tag{transform:translateX(4px)}
+
+    /* ==== Education cards ==== */
+    .edu-card{display:flex;flex-direction:column;gap:6px}
+    .edu-card .accent{font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+    .edu-card h3{margin:4px 0 6px;color:#24304a;font-size:1.05rem}
 
     /* ==== Contact cards ==== */
     .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .contact{padding:26px;text-align:center}
-    .contact i{font-size:1.5rem;color:#7659d9;margin-bottom:12px;transition:transform .3s}
-    .contact:hover i{transform:scale(1.2) rotate(-8deg)}
-    .contact a{color:#1d4ed8;font-weight:600;transition:color .3s}
+    .contact i{font-size:1.5rem;color:#7659d9;margin-bottom:12px;transition:transform .4s;display:inline-block}
+    .contact:hover i{transform:scale(1.3) rotate(-10deg);color:#e99bc2}
+    .contact a{color:#1d4ed8;font-weight:600;transition:color .3s;word-break:break-all}
     .contact a:hover{color:#be185d}
 
-    /* ==== CV ==== */
+    /* ==== CV section ==== */
     #cv{background:linear-gradient(135deg,rgba(238,233,255,.75),rgba(255,239,247,.72),rgba(231,248,255,.75));border-radius:24px}
-    #cv-preview{background:#fff!important;border:1px solid rgba(139,124,246,.15)!important;box-shadow:0 15px 40px rgba(90,80,140,.12)!important;border-radius:18px;overflow:hidden}
+    #cv-preview{background:#fff!important;border:1px solid rgba(139,124,246,.15)!important;box-shadow:0 15px 40px rgba(90,80,140,.12)!important;border-radius:18px;overflow:hidden;transition:all .4s}
+    #cv-preview:hover{box-shadow:0 22px 55px rgba(90,80,140,.2)!important}
+    .cv-loading{
+      padding:60px 20px;text-align:center;color:#7659d9;
+    }
+    .cv-loading .spinner{
+      width:44px;height:44px;border:4px solid rgba(139,124,246,.2);border-top-color:#8b7cf6;
+      border-radius:50%;margin:0 auto 16px;animation:spin 1s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ==== Footer ==== */
     footer{
       background:linear-gradient(135deg,#d9d1fa,#f4cadd,#c9ecfa);
+      background-size:200% 200%;
       color:#24304a;text-align:center;padding:34px 0;margin-top:40px;
-      font-size:.9rem;
+      font-size:.9rem;animation:navGrad 12s ease infinite;
     }
 
     /* ==== Back to top ==== */
     .back-top{
       position:fixed;bottom:26px;right:26px;width:48px;height:48px;border-radius:50%;
-      background:var(--grad-1);color:#fff;border:none;cursor:pointer;display:flex;
-      align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 10px 26px rgba(139,124,246,.4);
+      background:var(--grad-1);background-size:200% 200%;color:#fff;border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+      box-shadow:0 10px 26px rgba(139,124,246,.4);
       opacity:0;visibility:hidden;transform:translateY(20px);transition:all .35s;z-index:998;
     }
-    .back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
-    .back-top:hover{transform:translateY(-4px) scale(1.05)}
+    .back-top.show{opacity:1;visibility:visible;transform:translateY(0);animation:btnGrad 3s ease infinite}
+    .back-top:hover{transform:translateY(-4px) scale(1.08)}
+
+    /* ==== Floating decorative orbs ==== */
+    .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;opacity:.35;filter:blur(40px)}
+    .orb-1{top:20%;left:5%;width:180px;height:180px;background:radial-gradient(circle,#c8b6ff,transparent 70%);animation:orbFloat 18s ease-in-out infinite}
+    .orb-2{bottom:15%;right:8%;width:220px;height:220px;background:radial-gradient(circle,#ff9ecf,transparent 70%);animation:orbFloat 22s ease-in-out infinite reverse}
+    .orb-3{top:50%;right:15%;width:150px;height:150px;background:radial-gradient(circle,#a5f3fc,transparent 70%);animation:orbFloat 20s ease-in-out infinite 2s}
 
     /* ==== Responsive ==== */
     @media(max-width:820px){
@@ -192,10 +273,17 @@
       .grid,.contact-grid{grid-template-columns:1fr}
       h1{font-size:3.4rem}
       .page{padding:20px 16px 60px}
+      .orb{display:none}
     }
   </style>
 </head>
 <body id="top">
+
+  <!-- Decorative floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
   <div class="progress" id="progress"></div>
 
   <!-- NAVBAR -->
@@ -209,7 +297,7 @@
         <a href="#education">Education</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
-        <a href="#cv">CV</a>
+        <a href="#cv">Resume</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -220,11 +308,15 @@
     <header>
       <div>
         <div class="eyebrow">Portfolio • IT Student • Web Developer</div>
-        <h1>Kinnari<br>Patil</h1>
+        <h1>
+          <span style="animation-delay:.25s">K</span><span style="animation-delay:.3s">i</span><span style="animation-delay:.35s">n</span><span style="animation-delay:.4s">n</span><span style="animation-delay:.45s">a</span><span style="animation-delay:.5s">r</span><span style="animation-delay:.55s">i</span><br>
+          <span style="animation-delay:.6s">P</span><span style="animation-delay:.65s">a</span><span style="animation-delay:.7s">t</span><span style="animation-delay:.75s">i</span><span style="animation-delay:.8s">l</span>
+        </h1>
         <p class="tagline">Information Technology student at Rajiv Gandhi Institute of Technology, with a Diploma in Computer Engineering and a strong interest in building practical websites and applications.</p>
         <div class="actions">
           <a class="btn primary" href="#contact"><i class="fas fa-paper-plane"></i> Contact Me</a>
           <a class="btn secondary" href="#projects"><i class="fas fa-code"></i> View Projects</a>
+          <a class="btn secondary" href="#cv"><i class="fas fa-file-alt"></i> View Resume</a>
         </div>
       </div>
       <div class="hero-card">
@@ -263,25 +355,25 @@
       <section id="education">
         <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
         <div class="grid">
-          <div class="card">
+          <div class="edu-card">
             <div class="accent">2026 – Present</div>
             <h3>Bachelor of Engineering (B.E.) — Information Technology</h3>
             <p class="muted">Rajiv Gandhi Institute of Technology (RGIT), Mumbai</p>
             <p class="muted">University of Mumbai</p>
           </div>
-          <div class="card">
+          <div class="edu-card">
             <div class="accent">2024 – 2026</div>
             <h3>Diploma in Computer Engineering</h3>
             <p class="muted">Completed with <strong>90.71%</strong></p>
             <p class="muted">Maharashtra State Board of Technical Education (MSBTE)</p>
           </div>
-          <div class="card">
+          <div class="edu-card">
             <div class="accent">2022 – 2024</div>
             <h3>12th Science (HSC)</h3>
             <p class="muted">Higher Secondary Certificate — Science stream</p>
             <p class="muted">Maharashtra State Board of Secondary & Higher Secondary Education</p>
           </div>
-          <div class="card">
+          <div class="edu-card">
             <div class="accent">2012 – 2022</div>
             <h3>Secondary School (SSC)</h3>
             <p class="muted">Maharashtra State Board (SSC)</p>
@@ -316,7 +408,6 @@
         <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
         <div class="grid">
 
-          <!-- SecureEdge -->
           <div class="card project-card">
             <div>
               <span class="tag">WEB SECURITY</span>
@@ -333,7 +424,6 @@
             </div>
           </div>
 
-          <!-- Student Roadmap -->
           <div class="card project-card">
             <div>
               <span class="tag">EDUCATION</span>
@@ -350,7 +440,6 @@
             </div>
           </div>
 
-          <!-- Suraksha Sakhi -->
           <div class="card project-card">
             <div>
               <span class="tag">WEB APP</span>
@@ -367,7 +456,6 @@
             </div>
           </div>
 
-          <!-- Govardhan Eco Village -->
           <div class="card project-card">
             <div>
               <span class="tag">WEB DEVELOPMENT</span>
@@ -384,7 +472,6 @@
             </div>
           </div>
 
-          <!-- Event Management -->
           <div class="card project-card">
             <div>
               <span class="tag">WEB DEVELOPMENT</span>
@@ -412,16 +499,20 @@
         </div>
       </section>
 
-      <!-- CV -->
+      <!-- CV / RESUME -->
       <section id="cv">
-        <h2 class="section-title"><i class="fas fa-file-alt"></i> My CV</h2>
-        <p class="muted">View my latest CV online or download it as a PDF.</p>
+        <h2 class="section-title"><i class="fas fa-file-alt"></i> My Resume</h2>
+        <p class="muted">View my latest resume online or download it as a PDF.</p>
         <div class="actions">
-          <a class="btn primary" href="#cv-preview"><i class="fas fa-file-pdf"></i> View CV</a>
-          <a class="btn secondary" id="download-cv" href="#" download="Kinnari_Patil_CV.pdf"><i class="fas fa-download"></i> Download CV</a>
+          <button class="btn primary" id="view-cv-btn" type="button"><i class="fas fa-file-pdf"></i> View Resume</button>
+          <a class="btn secondary" id="download-cv" href="#" download="Kinnari_Patil_Resume.pdf"><i class="fas fa-download"></i> Download Resume</a>
         </div>
-        <div id="cv-preview" style="margin-top:2rem;border-radius:18px;overflow:hidden;border:1px solid rgba(139,124,246,.15);background:#fff;">
-          <iframe id="cv-frame" title="Kinnari Patil CV" style="width:100%;height:850px;border:0;"></iframe>
+        <div id="cv-preview" style="margin-top:2rem;border-radius:18px;overflow:hidden;border:1px solid rgba(139,124,246,.15);background:#fff;min-height:400px;">
+          <div class="cv-loading" id="cv-loading">
+            <div class="spinner"></div>
+            <p>Loading resume…</p>
+          </div>
+          <iframe id="cv-frame" title="Kinnari Patil Resume" style="width:100%;height:850px;border:0;display:none;"></iframe>
         </div>
       </section>
 
@@ -466,46 +557,103 @@
     menu.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-    /* ==== Scroll progress bar + back-to-top ==== */
+    /* ==== Scroll progress + back-to-top ==== */
     const progress = document.getElementById('progress');
     const backTop = document.getElementById('backTop');
     window.addEventListener('scroll', () => {
       const h = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = h > 0 ? (window.scrollY / h) * 100 : 0;
-      progress.style.width = scrolled + '%';
-      if (window.scrollY > 400) backTop.classList.add('show');
-      else backTop.classList.remove('show');
+      progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      backTop.classList.toggle('show', window.scrollY > 400);
     });
     backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    /* ==== Section reveal on scroll ==== */
-    const sections = document.querySelectorAll('section');
+    /* ==== Section reveal ==== */
     const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.12 });
-    sections.forEach(s => revealObserver.observe(s));
+    document.querySelectorAll('section').forEach(s => revealObserver.observe(s));
 
-    /* ==== Pill stagger animation ==== */
-    const pills = document.querySelectorAll('.pill');
-    pills.forEach((p, i) => { p.style.animationDelay = (i * 40) + 'ms'; });
+    /* ==== Pill stagger ==== */
+    document.querySelectorAll('.pill').forEach((p, i) => { p.style.animationDelay = (i * 40) + 'ms'; });
 
-    /* ==== CV inline PDF ==== */
+    /* ==== CV / RESUME - View + Download ==== */
     (function () {
+      // ==== PASTE YOUR BASE64 PDF STRING HERE ====
+      // Replace the string below with your full base64 PDF data URI.
+      // It should start with: data:application/pdf;base64,JVBERi0xLjQK...
       const pdfData = "data:application/pdf;base64,JVBERi0xLjQKJfbk/N8KMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovVmVyc2lvbiAvMS40Ci9QYWdlcyAyIDAgUgovTWV0YWRhdGEgMyAwIFIKL1N0cnVjdFRyZWVSb290IDQgMCBSCi9NYXJrSW5mbyA1IDAgUgovTGFuZyAoZW4pCi9WaWV3ZXJQcmVmZXJlbmNlcyA2IDAgUgovT3V0bGluZXMgNyAwIFIKL091dHB1dEludGVudHMgWzggMCBSXQo+PgplbmRvYmoKOSAwIG9iago8PAovVGl0bGUgPDUzNzU3MjYxNkI3MzY4NjEyMDUzNjE2QjY4NjkyMDg1MjA1NzZGNkQ2NTZFMjA1MzYxNjY2NTc0NzkyMDU3NjU2MjIwNDE3MDcwNkM2OTYzNjE3NDY5NkY2RTJFMjA0NzY5NzQ0ODc1NjIzQTIwNjg3NDc0NzA3MzNBMkYyRjcwNjE3NDY5NkM2QjY5NkU2RTYxNzI2OTM1MzMyRDczNkI2NTc0NjM2ODJFNjc2OTc0Njg3NTYyMkU2OTZGMkY2QjcyNjk3MzY4NkU2MTJGMjA0NzZGNzY2MTcyNjQ2ODYxNkUyMDQ1NjM2RjIwNTY2OTZDNkM2MTY3NjUyMDg1MjA0OTUzNEI0MzRGNEUyMDQ5NkU2NjZGNzI2RDYxNzQ2OTZGNkU2MTZDMjA1NzY1NjI3MzY5NzQ2NTJFMjA0NzY5NzQ0ODc1NjIzQTIwNjg3NDc0NzA3MzNBMkYyRjcwNjE3NDY5NkM2QjY5NkU2RTYxNzI2OTM1MzMyRDczNkI2NTc0NjM2ODJFNjc2OTc0Njg3NTYyMkU2OTZGMkY1Mzc0NzU2NDY1NkU3NDJENTI2RjYxNjQ2RDYxNzAyRjIwNTM2NTYzNzU3MjY1NDU2NDY3NjUyMDg1MjA0Mzc5NjI2NTcyNzM2NTYzNzU3MjY5NzQ3OT4KL0NyZWF0b3IgKENhbnZhKQovUHJvZHVjZXIgKENhbnZhKQovQ3JlYXRpb25EYXRlIChEOjIwMjYwOTIwMDY0MjA2KzAwJzAwJykKL01vZERhdGUgKEQ6MjAyNjA5MjAwNjQyMDYrMDAnMDAnKQovS2V5d29yZHMgKERBSFZ0bU5MNlVzLEJBRm4zZm1od1NRKQovQXV0aG9yIChraW5uYXJpIFBhdGlsKQovVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2Jq";
+      // ============================================
+
+      const loading = document.getElementById('cv-loading');
+      const frame = document.getElementById('cv-frame');
+      const download = document.getElementById('download-cv');
+      const viewBtn = document.getElementById('view-cv-btn');
+
+      // Check if the PDF data is valid (long enough to be real)
+      const hasValidPDF = pdfData && pdfData.length > 200 && pdfData.startsWith("data:application/pdf;base64,");
+
+      if (!hasValidPDF) {
+        // Fallback: if no PDF data, hide the frame and show a message
+        if (loading) {
+          loading.innerHTML = `
+            <i class="fas fa-file-pdf" style="font-size:3rem;color:#8b7cf6;margin-bottom:12px;display:block;"></i>
+            <p style="margin:0 0 6px;font-weight:700;color:#24304a;">Resume preview unavailable</p>
+            <p style="margin:0;font-size:.9rem;color:#526078;">Click "Download Resume" to save the file, or add your PDF data to enable preview.</p>
+          `;
+        }
+        if (viewBtn) {
+          viewBtn.addEventListener('click', () => {
+            alert('Resume preview is not available. Please click "Download Resume" to save the file.');
+          });
+        }
+        return;
+      }
+
       try {
-        const byteString = atob(pdfData.split(",")[1]);
+        const base64 = pdfData.split(",")[1];
+        const byteString = atob(base64);
         const bytes = new Uint8Array(byteString.length);
         for (let i = 0; i < byteString.length; i++) bytes[i] = byteString.charCodeAt(i);
         const blob = new Blob([bytes], { type: "application/pdf" });
         const url = URL.createObjectURL(blob);
-        const frame = document.getElementById("cv-frame");
-        const download = document.getElementById("download-cv");
-        if (frame) frame.src = url;
-        if (download) download.href = url;
+
+        // Set download link
+        if (download) {
+          download.href = url;
+          download.setAttribute('download', 'Kinnari_Patil_Resume.pdf');
+        }
+
+        // Set iframe
+        if (frame) {
+          frame.src = url;
+          frame.onload = () => {
+            if (loading) loading.style.display = 'none';
+            frame.style.display = 'block';
+          };
+          // Fallback if onload doesn't fire within 3 seconds
+          setTimeout(() => {
+            if (loading && loading.style.display !== 'none') {
+              loading.style.display = 'none';
+              frame.style.display = 'block';
+            }
+          }, 3000);
+        }
+
+        // View button scrolls to preview & ensures iframe is loaded
+        if (viewBtn) {
+          viewBtn.addEventListener('click', () => {
+            document.getElementById('cv-preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        }
+
       } catch (e) {
-        console.warn('CV preview could not be loaded inline:', e);
+        console.warn('CV preview error:', e);
+        if (loading) {
+          loading.innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="font-size:2.5rem;color:#f472b6;margin-bottom:12px;display:block;"></i>
+            <p style="margin:0;color:#526078;">Could not load resume preview. Please use the Download button.</p>
+          `;
+        }
       }
     })();
   </script>
