@@ -279,7 +279,6 @@
 </head>
 <body id="top">
 
-  <!-- Decorative floating orbs -->
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
@@ -333,13 +332,11 @@
     </header>
 
     <main>
-      <!-- ABOUT -->
       <section id="about">
         <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
         <p class="about">I am Kinnari Patil, an Information Technology student at Rajiv Gandhi Institute of Technology. I completed my 12th in Science (HSC) and my Diploma in Computer Engineering with 90.71%, and have hands-on experience creating websites and database-driven applications. I enjoy learning new technologies, turning ideas into working projects, and improving my problem-solving and development skills.</p>
       </section>
 
-      <!-- EXPERIENCE -->
       <section id="experience">
         <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
         <div class="timeline">
@@ -351,7 +348,6 @@
         </div>
       </section>
 
-      <!-- EDUCATION -->
       <section id="education">
         <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
         <div class="grid">
@@ -381,7 +377,6 @@
         </div>
       </section>
 
-      <!-- SKILLS -->
       <section id="skills">
         <h2 class="section-title"><i class="fas fa-layer-group"></i> Technical Skills</h2>
         <div class="skill-heading">Languages & Web</div>
@@ -403,7 +398,6 @@
         </div>
       </section>
 
-      <!-- PROJECTS -->
       <section id="projects">
         <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
         <div class="grid">
@@ -488,7 +482,6 @@
         </div>
       </section>
 
-      <!-- HIGHLIGHTS -->
       <section id="achievements">
         <h2 class="section-title"><i class="fas fa-award"></i> Highlights</h2>
         <div class="grid">
@@ -504,19 +497,18 @@
         <h2 class="section-title"><i class="fas fa-file-alt"></i> My Resume</h2>
         <p class="muted">View my latest resume online or download it as a PDF.</p>
         <div class="actions">
-          <button class="btn primary" id="view-cv-btn" type="button"><i class="fas fa-file-pdf"></i> View Resume</button>
-          <a class="btn secondary" id="download-cv" href="#" download="Kinnari_Patil_Resume.pdf"><i class="fas fa-download"></i> Download Resume</a>
+          <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">
+            <i class="fas fa-file-pdf"></i> View Resume
+          </a>
+          <a class="btn secondary" href="resume.pdf" download="Kinnari_Patil_Resume.pdf">
+            <i class="fas fa-download"></i> Download Resume
+          </a>
         </div>
-        <div id="cv-preview" style="margin-top:2rem;border-radius:18px;overflow:hidden;border:1px solid rgba(139,124,246,.15);background:#fff;min-height:400px;">
-          <div class="cv-loading" id="cv-loading">
-            <div class="spinner"></div>
-            <p>Loading resume…</p>
-          </div>
-          <iframe id="cv-frame" title="Kinnari Patil Resume" style="width:100%;height:850px;border:0;display:none;"></iframe>
+        <div id="cv-preview" style="margin-top:2rem;border-radius:18px;overflow:hidden;border:1px solid rgba(139,124,246,.15);background:#fff;">
+          <iframe id="cv-frame" src="resume.pdf#toolbar=1&view=FitH" title="Kinnari Patil Resume" style="width:100%;height:850px;border:0;display:block;"></iframe>
         </div>
       </section>
 
-      <!-- CONTACT -->
       <section id="contact">
         <h2 class="section-title"><i class="fas fa-address-card"></i> Contact Me</h2>
         <div class="contact-grid">
@@ -544,7 +536,6 @@
     </footer>
   </div>
 
-  <!-- BACK TO TOP -->
   <button class="back-top" id="backTop" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
   </button>
@@ -575,87 +566,6 @@
 
     /* ==== Pill stagger ==== */
     document.querySelectorAll('.pill').forEach((p, i) => { p.style.animationDelay = (i * 40) + 'ms'; });
-
-    /* ==== CV / RESUME - View + Download ==== */
-    (function () {
-      // ==== PASTE YOUR BASE64 PDF STRING HERE ====
-      // Replace the string below with your full base64 PDF data URI.
-      // It should start with: data:application/pdf;base64,JVBERi0xLjQK...
-      const pdfData = "data:application/pdf;base64,JVBERi0xLjQKJfbk/N8KMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovVmVyc2lvbiAvMS40Ci9QYWdlcyAyIDAgUgovTWV0YWRhdGEgMyAwIFIKL1N0cnVjdFRyZWVSb290IDQgMCBSCi9NYXJrSW5mbyA1IDAgUgovTGFuZyAoZW4pCi9WaWV3ZXJQcmVmZXJlbmNlcyA2IDAgUgovT3V0bGluZXMgNyAwIFIKL091dHB1dEludGVudHMgWzggMCBSXQo+PgplbmRvYmoKOSAwIG9iago8PAovVGl0bGUgPDUzNzU3MjYxNkI3MzY4NjEyMDUzNjE2QjY4NjkyMDg1MjA1NzZGNkQ2NTZFMjA1MzYxNjY2NTc0NzkyMDU3NjU2MjIwNDE3MDcwNkM2OTYzNjE3NDY5NkY2RTJFMjA0NzY5NzQ0ODc1NjIzQTIwNjg3NDc0NzA3MzNBMkYyRjcwNjE3NDY5NkM2QjY5NkU2RTYxNzI2OTM1MzMyRDczNkI2NTc0NjM2ODJFNjc2OTc0Njg3NTYyMkU2OTZGMkY2QjcyNjk3MzY4NkU2MTJGMjA0NzZGNzY2MTcyNjQ2ODYxNkUyMDQ1NjM2RjIwNTY2OTZDNkM2MTY3NjUyMDg1MjA0OTUzNEI0MzRGNEUyMDQ5NkU2NjZGNzI2RDYxNzQ2OTZGNkU2MTZDMjA1NzY1NjI3MzY5NzQ2NTJFMjA0NzY5NzQ0ODc1NjIzQTIwNjg3NDc0NzA3MzNBMkYyRjcwNjE3NDY5NkM2QjY5NkU2RTYxNzI2OTM1MzMyRDczNkI2NTc0NjM2ODJFNjc2OTc0Njg3NTYyMkU2OTZGMkY1Mzc0NzU2NDY1NkU3NDJENTI2RjYxNjQ2RDYxNzAyRjIwNTM2NTYzNzU3MjY1NDU2NDY3NjUyMDg1MjA0Mzc5NjI2NTcyNzM2NTYzNzU3MjY5NzQ3OT4KL0NyZWF0b3IgKENhbnZhKQovUHJvZHVjZXIgKENhbnZhKQovQ3JlYXRpb25EYXRlIChEOjIwMjYwOTIwMDY0MjA2KzAwJzAwJykKL01vZERhdGUgKEQ6MjAyNjA5MjAwNjQyMDYrMDAnMDAnKQovS2V5d29yZHMgKERBSFZ0bU5MNlVzLEJBRm4zZm1od1NRKQovQXV0aG9yIChraW5uYXJpIFBhdGlsKQovVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2Jq";
-      // ============================================
-
-      const loading = document.getElementById('cv-loading');
-      const frame = document.getElementById('cv-frame');
-      const download = document.getElementById('download-cv');
-      const viewBtn = document.getElementById('view-cv-btn');
-
-      // Check if the PDF data is valid (long enough to be real)
-      const hasValidPDF = pdfData && pdfData.length > 200 && pdfData.startsWith("data:application/pdf;base64,");
-
-      if (!hasValidPDF) {
-        // Fallback: if no PDF data, hide the frame and show a message
-        if (loading) {
-          loading.innerHTML = `
-            <i class="fas fa-file-pdf" style="font-size:3rem;color:#8b7cf6;margin-bottom:12px;display:block;"></i>
-            <p style="margin:0 0 6px;font-weight:700;color:#24304a;">Resume preview unavailable</p>
-            <p style="margin:0;font-size:.9rem;color:#526078;">Click "Download Resume" to save the file, or add your PDF data to enable preview.</p>
-          `;
-        }
-        if (viewBtn) {
-          viewBtn.addEventListener('click', () => {
-            alert('Resume preview is not available. Please click "Download Resume" to save the file.');
-          });
-        }
-        return;
-      }
-
-      try {
-        const base64 = pdfData.split(",")[1];
-        const byteString = atob(base64);
-        const bytes = new Uint8Array(byteString.length);
-        for (let i = 0; i < byteString.length; i++) bytes[i] = byteString.charCodeAt(i);
-        const blob = new Blob([bytes], { type: "application/pdf" });
-        const url = URL.createObjectURL(blob);
-
-        // Set download link
-        if (download) {
-          download.href = url;
-          download.setAttribute('download', 'Kinnari_Patil_Resume.pdf');
-        }
-
-        // Set iframe
-        if (frame) {
-          frame.src = url;
-          frame.onload = () => {
-            if (loading) loading.style.display = 'none';
-            frame.style.display = 'block';
-          };
-          // Fallback if onload doesn't fire within 3 seconds
-          setTimeout(() => {
-            if (loading && loading.style.display !== 'none') {
-              loading.style.display = 'none';
-              frame.style.display = 'block';
-            }
-          }, 3000);
-        }
-
-        // View button scrolls to preview & ensures iframe is loaded
-        if (viewBtn) {
-          viewBtn.addEventListener('click', () => {
-            document.getElementById('cv-preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-        }
-
-      } catch (e) {
-        console.warn('CV preview error:', e);
-        if (loading) {
-          loading.innerHTML = `
-            <i class="fas fa-exclamation-triangle" style="font-size:2.5rem;color:#f472b6;margin-bottom:12px;display:block;"></i>
-            <p style="margin:0;color:#526078;">Could not load resume preview. Please use the Download button.</p>
-          `;
-        }
-      }
-    })();
   </script>
 </body>
 </html>
